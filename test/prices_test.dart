@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:btc_balance_flutter/prices.dart';
+import 'package:btc_balance_flutter/core/prices.dart';
 
 void main() {
   test("Obtaining BTC price in USD correctly", () async {
