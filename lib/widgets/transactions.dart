@@ -68,7 +68,7 @@ class Element extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "${transaction.btc} / ${transaction.investment}",
+              "BTC ${transaction.btc} / \$${transaction.investment}",
               style: TextStyle(
                   fontSize: 24,
                   color: transaction.positive ? Colors.green : Colors.red),
