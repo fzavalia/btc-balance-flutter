@@ -35,18 +35,14 @@ class _TransactionsState extends State<Transactions> {
 
     return ListView.separated(
         itemCount: transactions.length + 1,
-        itemBuilder: (context, index) {
-          final transaction = data.transactions[index];
-
-          return index < transactions.length
-              ? Element(
-                  transaction: transaction,
-                  onDelete: () => this.setState(() {
-                        showDelete = true;
-                        toDelete = transaction;
-                      }))
-              : Container(height: 75);
-        },
+        itemBuilder: (context, index) => index >= data.transactions.length
+            ? Container(height: 75)
+            : Element(
+                transaction: data.transactions[index],
+                onDelete: () => this.setState(() {
+                      showDelete = true;
+                      toDelete = data.transactions[index];
+                    })),
         separatorBuilder: (context, index) => Container(
               height: 10,
             ));
@@ -76,7 +72,7 @@ class Element extends StatelessWidget {
   final Transaction transaction;
   final void Function() onDelete;
 
-  Element({this.transaction, this.onDelete});
+  Element({Key key, this.transaction, this.onDelete}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
