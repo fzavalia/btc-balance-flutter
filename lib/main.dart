@@ -12,7 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BTC Balance',
-      theme: ThemeData(brightness: Brightness.dark),
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.orange,
+        accentColor: Colors.orange,
+      ),
       home: Transactions(),
     );
   }
