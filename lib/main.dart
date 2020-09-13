@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import './widgets/Purchases.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,16 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Flutter',
+      title: 'BTC Balance',
       theme: ThemeData(brightness: Brightness.dark),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("BTC Balance"),
-        ),
-        body: Center(
-          child: Text("Hello World"),
-        ),
-      ),
+      home: Purchases(),
     );
   }
 }
