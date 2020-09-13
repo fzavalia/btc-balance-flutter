@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'BTC Balance',
       theme: ThemeData(brightness: Brightness.dark),
-      home: Purchases(),
+      home: Transactions(),
     );
   }
 }

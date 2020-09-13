@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../core/data.dart';
 
-class Purchases extends StatefulWidget {
+class Transactions extends StatefulWidget {
   @override
-  _PurchasesState createState() => _PurchasesState();
+  _TransactionsState createState() => _TransactionsState();
 }
 
-class _PurchasesState extends State<Purchases> {
+class _TransactionsState extends State<Transactions> {
   final Data data = Data([
     Transaction(1500, 0.234, true),
     Transaction(50000, 0.234, false),
