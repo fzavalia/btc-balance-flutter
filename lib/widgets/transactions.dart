@@ -30,17 +30,23 @@ class _TransactionsState extends State<Transactions> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BTC Purchases"),
+        title: Text("BTC Transactions"),
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
         child: ListView.separated(
-          itemCount: data.transactions.length,
-          itemBuilder: (context, index) => Element(data.transactions[index]),
+          itemCount: data.transactions.length + 1,
+          itemBuilder: (context, index) => index < data.transactions.length
+              ? Element(data.transactions[index])
+              : Container(height: 75),
           separatorBuilder: (context, index) => Container(
             height: 10,
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {},
+        child: Icon(Icons.add),
       ),
     );
   }
@@ -58,11 +64,23 @@ class Element extends StatelessWidget {
           color: Color(0xff333333), borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: EdgeInsets.all(10),
-        child: Text(
-          "${transaction.btc} / ${transaction.investment}",
-          style: TextStyle(
-              fontSize: 24,
-              color: transaction.positive ? Colors.green : Colors.red),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "${transaction.btc} / ${transaction.investment}",
+              style: TextStyle(
+                  fontSize: 24,
+                  color: transaction.positive ? Colors.green : Colors.red),
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.remove,
+                color: Colors.red,
+              ),
+              onPressed: () => {},
+            )
+          ],
         ),
       ),
     );
