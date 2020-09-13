@@ -26,10 +26,6 @@ class _TransactionsState extends State<Transactions> {
     Transaction(3000, 0.234, true),
   ]);
 
-  bool showDelete = false;
-
-  Transaction toDelete;
-
   void _showAlert(BuildContext context, Transaction transaction) => showDialog(
       context: context,
       builder: (_) => AlertDialog(
