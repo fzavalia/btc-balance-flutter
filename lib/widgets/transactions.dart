@@ -26,23 +26,43 @@ class _TransactionsState extends State<Transactions> {
     Transaction(3000, 0.234, true),
   ]);
 
+  bool showDelete = false;
+
+  Transaction toDelete;
+
+  Widget _buildList() {
+    final transactions = data.transactions;
+
+    return ListView.separated(
+        itemCount: transactions.length + 1,
+        itemBuilder: (context, index) {
+          final transaction = data.transactions[index];
+
+          return index < transactions.length
+              ? Element(
+                  transaction: transaction,
+                  onDelete: () => this.setState(() {
+                        showDelete = true;
+                        toDelete = transaction;
+                      }))
+              : Container(height: 75);
+        },
+        separatorBuilder: (context, index) => Container(
+              height: 10,
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(showDelete);
+    print(toDelete);
     return Scaffold(
       appBar: AppBar(
         title: Text("BTC Transactions"),
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
-        child: ListView.separated(
-          itemCount: data.transactions.length + 1,
-          itemBuilder: (context, index) => index < data.transactions.length
-              ? Element(data.transactions[index])
-              : Container(height: 75),
-          separatorBuilder: (context, index) => Container(
-            height: 10,
-          ),
-        ),
+        child: _buildList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {},
@@ -54,8 +74,9 @@ class _TransactionsState extends State<Transactions> {
 
 class Element extends StatelessWidget {
   final Transaction transaction;
+  final void Function() onDelete;
 
-  Element(this.transaction);
+  Element({this.transaction, this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +99,7 @@ class Element extends StatelessWidget {
                 Icons.remove,
                 color: Colors.red,
               ),
-              onPressed: () => {},
+              onPressed: onDelete,
             )
           ],
         ),
