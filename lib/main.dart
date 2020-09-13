@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import './widgets/Purchases.dart';
+import './widgets/transactions.dart';
 
 void main() => runApp(MyApp());
 
