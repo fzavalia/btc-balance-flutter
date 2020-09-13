@@ -30,7 +30,20 @@ class _TransactionsState extends State<Transactions> {
 
   Transaction toDelete;
 
-  Widget _buildList() {
+  void _showAlert(BuildContext context, Transaction transaction) => showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+            title: Text("Warning!"),
+            content: Text("Do you really want to delete the transaction?"),
+            actions: [
+              new FlatButton(
+                  onPressed: () => Navigator.pop(context), child: Text("No")),
+              new FlatButton(
+                  onPressed: () => Navigator.pop(context), child: Text("Yes"))
+            ],
+          ));
+
+  Widget _buildList(BuildContext context) {
     final transactions = data.transactions;
 
     return ListView.separated(
@@ -39,10 +52,7 @@ class _TransactionsState extends State<Transactions> {
             ? Container(height: 75)
             : Element(
                 transaction: data.transactions[index],
-                onDelete: () => this.setState(() {
-                      showDelete = true;
-                      toDelete = data.transactions[index];
-                    })),
+                onDelete: () => _showAlert(context, data.transactions[index])),
         separatorBuilder: (context, index) => Container(
               height: 10,
             ));
@@ -58,7 +68,7 @@ class _TransactionsState extends State<Transactions> {
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
-        child: _buildList(),
+        child: _buildList(context),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {},
