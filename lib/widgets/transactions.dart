@@ -56,8 +56,6 @@ class _TransactionsState extends State<Transactions> {
 
   @override
   Widget build(BuildContext context) {
-    print(showDelete);
-    print(toDelete);
     return Scaffold(
       appBar: AppBar(
         title: Text("BTC Transactions"),
