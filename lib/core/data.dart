@@ -2,6 +2,41 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 
+Data _data;
+
+Future<Data> getData() async {
+  if (_data == null) {
+    _data = await _loadData();
+  }
+  return _data;
+}
+
+Future<void> updateData(Data data) async {
+  _data = data;
+
+  final dir = await getApplicationDocumentsDirectory();
+  final file = File("${dir.path}/data.json");
+  final encodedData = jsonEncode(data);
+
+  await file.writeAsString(encodedData);
+}
+
+Future<Data> _loadData() async {
+  final dir = await getApplicationDocumentsDirectory();
+  final file = File("${dir.path}/data.json");
+  final exists = await file.exists();
+
+  if (!exists) {
+    return Data(List.empty());
+  }
+
+  final str = await file.readAsString();
+
+  return Data.fromJson(jsonDecode(str));
+}
+
+// Model
+
 class Data {
   final List<Transaction> transactions;
 
@@ -29,26 +64,4 @@ class Transaction {
 
   Map<String, dynamic> toJson() =>
       ({"investment": investment, "btc": btc, "positive": positive});
-}
-
-Future<Data> loadData() async {
-  final dir = await getApplicationDocumentsDirectory();
-  final file = File("${dir.path}/data.json");
-  final exists = await file.exists();
-
-  if (!exists) {
-    return Data(List.empty());
-  }
-
-  final str = await file.readAsString();
-
-  return Data.fromJson(jsonDecode(str));
-}
-
-Future<void> saveData(Data data) async {
-  final dir = await getApplicationDocumentsDirectory();
-  final file = File("${dir.path}/data.json");
-  final encodedData = jsonEncode(data);
-
-  await file.writeAsString(encodedData);
 }

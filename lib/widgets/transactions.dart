@@ -7,24 +7,7 @@ class Transactions extends StatefulWidget {
 }
 
 class _TransactionsState extends State<Transactions> {
-  final Data data = Data([
-    Transaction(1500, 0.234, true),
-    Transaction(50000, 0.234, false),
-    Transaction(1200, 0.234, true),
-    Transaction(3000, 0.234, true),
-    Transaction(1500, 0.234, true),
-    Transaction(50000, 0.234, false),
-    Transaction(1200, 0.234, true),
-    Transaction(3000, 0.234, true),
-    Transaction(1500, 0.234, true),
-    Transaction(50000, 0.234, false),
-    Transaction(1200, 0.234, true),
-    Transaction(3000, 0.234, true),
-    Transaction(1500, 0.234, true),
-    Transaction(50000, 0.234, false),
-    Transaction(1200, 0.234, true),
-    Transaction(3000, 0.234, true),
-  ]);
+  Data data;
 
   void _showAlert(BuildContext context, Transaction transaction) => showDialog(
       context: context,
